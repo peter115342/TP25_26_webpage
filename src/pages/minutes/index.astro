@@ -18,7 +18,10 @@ const sortedMinutes = minutes.sort(
     <section class="minutes-list">
       {
         sortedMinutes.map((minute) => (
-          <a href={`/minutes/${minute.slug}`} class="minute-card-link">
+          <a
+            href={`/TP25_26_webpage/minutes/${minute.slug}`}
+            class="minute-card-link"
+          >
             <article class="minute-card">
               <h3>
                 {minute.data.title ||

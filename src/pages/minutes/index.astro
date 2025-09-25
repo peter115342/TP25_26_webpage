@@ -1,0 +1,144 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const minutes = await getCollection("minutes");
+const sortedMinutes = minutes.sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+);
+---
+
+<Layout title="Zápisnice zo stretnutí - Virtual Data Analyst">
+  <main class="container">
+    <header>
+      <h1>Zápisnice zo stretnutí</h1>
+      <p>Dokumentácia všetkých stretnutí tímu Virtual Data Analyst</p>
+    </header>
+
+    <section class="minutes-list">
+      {
+        sortedMinutes.map((minute) => (
+          <a href={`/minutes/${minute.slug}`} class="minute-card-link">
+            <article class="minute-card">
+              <h3>
+                {minute.data.title ||
+                  `Stretnutie ${minute.data.date.toLocaleDateString("sk-SK")}`}
+              </h3>
+              <div class="minute-meta">
+                <span class="date">
+                  📅 {minute.data.date.toLocaleDateString("sk-SK")}
+                </span>
+                {minute.data.location && (
+                  <span class="location">📍 {minute.data.location}</span>
+                )}
+                {minute.data.attendees && (
+                  <span class="attendees">
+                    👥 {minute.data.attendees.length} účastníkov
+                  </span>
+                )}
+              </div>
+              {minute.data.topics && (
+                <div class="topics">
+                  <strong>Témy:</strong>
+                  <ul>
+                    {minute.data.topics.map((topic) => (
+                      <li>{topic}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </article>
+          </a>
+        ))
+      }
+
+      {
+        sortedMinutes.length === 0 && (
+          <div class="no-minutes">
+            <p>Zatiaľ neboli pridané žiadne zápisnice.</p>
+            <p>
+              Zápisnice sa automaticky zobrazia po pridaní .md súborov do
+              priečinka src/content/minutes/
+            </p>
+          </div>
+        )
+      }
+    </section>
+  </main>
+</Layout>
+
+<style>
+  header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid var(--pwc-light);
+  }
+
+  .minutes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .minute-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+  }
+
+  .minute-card {
+    background: var(--pwc-light);
+    padding: 2rem;
+    border-radius: 8px;
+    border-left: 4px solid var(--pwc-orange);
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+
+  .minute-card-link:hover .minute-card {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-left-color: var(--pwc-orange-light);
+  }
+
+  .minute-card h3 {
+    margin: 0 0 1rem 0;
+    color: var(--pwc-dark);
+    transition: color 0.2s;
+  }
+
+  .minute-card-link:hover .minute-card h3 {
+    color: var(--pwc-orange);
+  }
+
+  .minute-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: var(--pwc-gray);
+  }
+
+  .topics {
+    margin-top: 1rem;
+  }
+
+  .topics ul {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+  }
+
+  .topics li {
+    margin-bottom: 0.25rem;
+  }
+
+  .no-minutes {
+    text-align: center;
+    padding: 3rem;
+    background: var(--pwc-light);
+    border-radius: 8px;
+    color: var(--pwc-gray);
+  }
+</style>

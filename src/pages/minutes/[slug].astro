@@ -1,0 +1,167 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const minutes = await getCollection("minutes");
+  return minutes.map((minute) => ({
+    params: { slug: minute.slug },
+    props: minute,
+  }));
+}
+
+const minute = Astro.props;
+const { Content } = await minute.render();
+---
+
+<Layout
+  title={minute.data.title ||
+    `Zápisnica - ${minute.data.date.toLocaleDateString("sk-SK")}`}
+>
+  <main class="container">
+    <header>
+      <a href="/minutes" class="back-link">← Späť na zápisnice</a>
+      <div class="minute-meta">
+        <span class="date"
+          >📅 {minute.data.date.toLocaleDateString("sk-SK")}</span
+        >
+        {
+          minute.data.location && (
+            <span class="location">📍 {minute.data.location}</span>
+          )
+        }
+        {
+          minute.data.attendees && (
+            <span class="attendees">
+              👥 {minute.data.attendees.length} účastníkov
+            </span>
+          )
+        }
+      </div>
+    </header>
+
+    <article class="minute-content">
+      <Content />
+    </article>
+  </main>
+</Layout>
+
+<style>
+  header {
+    margin-bottom: 2rem;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
+
+  .back-link {
+    display: inline-block;
+    margin-bottom: 1rem;
+    color: var(--pwc-orange);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--pwc-orange);
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .back-link:hover {
+    background: var(--pwc-orange);
+    color: white;
+  }
+
+  .minute-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: var(--pwc-gray);
+  }
+
+  .minute-content {
+    line-height: 1.6;
+    padding: 1rem;
+    background: #fafafa;
+    border-radius: 8px;
+    margin-top: 1rem;
+  }
+
+  /* Mobile responsive adjustments */
+  @media (max-width: 768px) {
+    .container {
+      padding: 1rem;
+    }
+
+    .minute-content {
+      padding: 1rem 0.75rem;
+      overflow-x: auto;
+    }
+
+    .minute-content :global(table) {
+      min-width: 500px;
+      font-size: 0.9rem;
+    }
+
+    .back-link {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.9rem;
+    }
+  }
+
+  .minute-content :global(h1) {
+    color: #333;
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom: 1rem;
+  }
+
+  .minute-content :global(h2),
+  .minute-content :global(h3) {
+    color: #333;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .minute-content :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .minute-content :global(th),
+  .minute-content :global(td) {
+    border: 1px solid #ddd;
+    padding: 0.75rem;
+    text-align: left;
+  }
+
+  .minute-content :global(th) {
+    background-color: #f5f5f5;
+    font-weight: bold;
+  }
+
+  .minute-content :global(tr:nth-child(even)) {
+    background-color: #f9f9f9;
+  }
+
+  .minute-content :global(ul),
+  .minute-content :global(ol) {
+    padding-left: 1.5rem;
+  }
+
+  .minute-content :global(li) {
+    margin-bottom: 0.5rem;
+  }
+
+  .minute-content :global(strong) {
+    color: #333;
+  }
+
+  .minute-content :global(hr) {
+    border: none;
+    border-top: 1px solid #e0e0e0;
+    margin: 2rem 0;
+  }
+</style>

@@ -1,22 +1,336 @@
+---
+export interface Props {
+  title?: string;
+}
+
+const { title = "Virtual Data Analyst - Tímový Projekt" } = Astro.props;
+---
+
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+<html lang="sk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="/" class="nav-brand">
+          <span class="brand-text">Virtual Data Analyst</span>
+        </a>
+        <div class="nav-menu">
+          <a href="/" class="nav-link">Domov</a>
+          <a href="/minutes" class="nav-link">Zápisnice</a>
+          <a href="/documentation" class="nav-link">Dokumentácia</a>
+        </div>
+        <div class="nav-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </nav>
+
+    <main class="main-content">
+      <slot />
+    </main>
+  </body>
 </html>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+<style is:global>
+  :root {
+    --pwc-orange: #ff6600;
+    --pwc-orange-light: #ff8533;
+    --pwc-orange-lighter: #ffa366;
+    --pwc-dark: #2d2d2d;
+    --pwc-light: #f5f5f5;
+    --pwc-gray: #a7a8aa;
+    --pwc-accent: #e87722;
+    --pwc-yellow: #ffc20e;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family:
+      system-ui,
+      -apple-system,
+      sans-serif;
+    color: var(--pwc-dark);
+    background-color: white;
+  }
+
+  .navbar {
+    background: white;
+    border-bottom: 2px solid var(--pwc-light);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+  }
+
+  .nav-brand {
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(
+      135deg,
+      var(--pwc-orange-light) 0%,
+      var(--pwc-orange-lighter) 100%
+    );
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 133, 51, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    transform: skewX(-8deg);
+    margin-right: 0.5rem;
+  }
+
+  .nav-brand .brand-text {
+    transform: skewX(8deg);
+  }
+
+  .nav-brand::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    transition: left 0.5s;
+  }
+
+  .nav-brand:hover::before {
+    left: 100%;
+  }
+
+  .nav-brand:hover {
+    transform: translateY(-2px) skewX(-8deg);
+    box-shadow: 0 6px 25px rgba(255, 133, 51, 0.5);
+  }
+
+  .nav-brand::after {
+    font-size: 1.2rem;
+    animation: pulse 2s infinite;
+    transform: skewX(8deg);
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+  }
+
+  .nav-menu {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .nav-link {
+    color: var(--pwc-dark);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    transition: all 0.2s;
+    font-weight: 500;
+  }
+
+  .nav-link:hover {
+    background: var(--pwc-orange);
+    color: white;
+  }
+
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    gap: 4px;
+  }
+
+  .nav-toggle span {
+    width: 25px;
+    height: 3px;
+    background: var(--pwc-dark);
+    border-radius: 2px;
+    transition: 0.3s;
+  }
+
+  .main-content {
+    min-height: calc(100vh - 70px);
+  }
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 768px) {
+    .nav-menu {
+      position: fixed;
+      top: 70px;
+      left: -100%;
+      width: 100%;
+      height: calc(100vh - 70px);
+      background: white;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding-top: 2rem;
+      transition: left 0.3s;
+      border-top: 1px solid var(--pwc-light);
+    }
+
+    .nav-menu.active {
+      left: 0;
+    }
+
+    .nav-toggle {
+      display: flex;
+    }
+
+    .nav-container {
+      padding: 0 1rem;
+    }
+
+    .container {
+      padding: 1rem;
+    }
+
+    .nav-brand {
+      font-size: 1.2rem;
+      padding: 0.5rem 1rem;
+      transform: skewX(-8deg);
+    }
+
+    .nav-brand:hover {
+      transform: translateY(-2px) skewX(-8deg);
+    }
+
+    .nav-brand .brand-text {
+      display: none;
+    }
+
+    .nav-brand::after {
+      content: "VDA";
+      font-size: 1rem;
+      transform: skewX(8deg);
+    }
+  }
+
+  /* Global typography */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--pwc-dark);
+    margin-top: 0;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  h2 {
+    border-bottom: 1px solid var(--pwc-gray);
+    padding-bottom: 0.5rem;
+  }
+
+  /* Global components */
+  .section {
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: var(--pwc-light);
+    border-radius: 8px;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: var(--pwc-orange);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.2s;
+  }
+
+  .btn:hover {
+    background: var(--pwc-accent);
+  }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--pwc-orange);
+    border: 1px solid var(--pwc-orange);
+  }
+
+  .btn-secondary:hover {
+    background: var(--pwc-orange);
+    color: white;
+  }
 </style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const navToggle = document.querySelector(".nav-toggle");
+    const navMenu = document.querySelector(".nav-menu");
+
+    if (navToggle && navMenu) {
+      navToggle.addEventListener("click", () => {
+        navMenu.classList.toggle("active");
+      });
+
+      navMenu.addEventListener("click", (e) => {
+        if (
+          e.target &&
+          (e.target as HTMLElement).classList?.contains("nav-link")
+        ) {
+          navMenu.classList.remove("active");
+        }
+      });
+    }
+  });
+</script>

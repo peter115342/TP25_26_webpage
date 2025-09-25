@@ -1,11 +1,102 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Virtual Data Analyst - Tímový Projekt">
+  <main class="container">
+    <header>
+      <h1>Virtual Data Analyst</h1>
+      <p class="subtitle">Tímový projekt - TP25/26</p>
+    </header>
+
+    <section class="project-info section">
+      <h2>O projekte</h2>
+      <p>
+        Vyvíjame GenAI-powered aplikáciu, ktorá umožňuje netechnickým
+        používateľom analyzovať a spracovávať svoje dáta pomocou jednoduchého
+        webového rozhrania.
+      </p>
+
+      <h3>Hlavné funkcionality:</h3>
+      <ul>
+        <li>
+          Kladenie otázok v ľudskom jazyku (napr. "Aký bol najpredavanejší
+          produkt minulý rok?")
+        </li>
+        <li>
+          Využitie GenAI na pochopenie otázok a generovanie databázových dopytov
+        </li>
+        <li>Automatické vytváranie vizualizácií a analýz</li>
+        <li>Detekcia anomálií a chýbajúcich hodnôt v dátach</li>
+      </ul>
+    </section>
+
+    <section class="team-info section">
+      <h2>Náš tím</h2>
+      <div class="team-members">
+        <div class="member">
+          <h4>Peter Muzslay</h4>
+        </div>
+        <div class="member">
+          <h4>Janka Tarčáková</h4>
+        </div>
+        <div class="member">
+          <h4>Jana Kampová</h4>
+        </div>
+        <div class="member">
+          <h4>Jozef Guláš</h4>
+        </div>
+        <div class="member">
+          <h4>Tamara Uhrinová</h4>
+        </div>
+      </div>
+    </section>
+  </main>
 </Layout>
+
+<style>
+  header {
+    text-align: center;
+    margin-bottom: 3rem;
+    border-bottom: 2px solid var(--pwc-light);
+    padding-bottom: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1.3rem;
+    color: var(--pwc-gray);
+    margin: 0;
+  }
+
+  .team-members {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .member {
+    background: white;
+    padding: 1rem;
+    border-radius: 6px;
+    border-left: 4px solid var(--pwc-orange);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    min-height: 60px;
+  }
+
+  .member h4 {
+    margin: 0 0 0.5rem 0;
+    color: var(--pwc-dark);
+  }
+
+  ul {
+    line-height: 1.6;
+  }
+
+  li {
+    margin-bottom: 0.5rem;
+  }
+</style>

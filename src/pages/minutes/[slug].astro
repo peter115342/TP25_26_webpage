@@ -35,7 +35,8 @@ const { Content } = await minute.render();
         {
           minute.data.attendees && (
             <span class="attendees">
-              👥 {minute.data.attendees.length} účastníkov
+              👥 {minute.data.attendees.length}{" "}
+              {minute.data.attendees.length === 1 ? "účastník" : "účastníkov"}
             </span>
           )
         }

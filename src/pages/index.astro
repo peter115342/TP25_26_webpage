@@ -11,23 +11,28 @@ import Layout from "../layouts/Layout.astro";
 
     <section class="project-info section">
       <h2>O projekte</h2>
-      <p>
-        Vyvíjame GenAI-powered aplikáciu, ktorá umožňuje netechnickým
-        používateľom analyzovať a spracovávať svoje dáta pomocou jednoduchého
-        webového rozhrania.
+      <h3>Oficiálne zadanie:</h3>
+      <p class="assignment">
+        GenAI-powered application that allows non-technical users to analyze and
+        process their data. The application has a simple web UI where users ask
+        data-related questions, such as "What is the most profitable line of
+        service?", "How many records have missing values?" or even "Do we have
+        some anomalies in the transaction data?". The application uses GenAI to
+        understand the question and write a search query to pull relevant data
+        from company databases. It may also decide to call pre-defined
+        processing modules (e.g. anomaly detection). Based on the results it
+        will form a response to the question and display it within the UI,
+        optionally with some visualizations.
       </p>
-
       <h3>Hlavné funkcionality:</h3>
       <ul>
         <li>
-          Kladenie otázok v ľudskom jazyku (napr. "Aký bol najpredavanejší
+          Kladenie otázok v ľudskom jazyku (napr. "Aký bol najpredávanejší
           produkt minulý rok?")
         </li>
-        <li>
-          Využitie GenAI na pochopenie otázok a generovanie databázových dopytov
-        </li>
-        <li>Automatické vytváranie vizualizácií a analýz</li>
-        <li>Detekcia anomálií a chýbajúcich hodnôt v dátach</li>
+        <li>Automatické generovanie databázových dopytov pomocou GenAI</li>
+        <li>Vytváranie vizualizácií a analýz</li>
+        <li>Detekcia anomálií a chýbajúcich hodnôt</li>
       </ul>
     </section>
 

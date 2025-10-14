@@ -209,6 +209,11 @@ const { title = "Virtual Data Analyst - Tímový Projekt" } = Astro.props;
     color: white;
   }
 
+  .github-link:hover {
+    background: none;
+    color: inherit;
+  }
+
   .github-link {
     display: flex;
     align-items: center;
@@ -216,11 +221,14 @@ const { title = "Virtual Data Analyst - Tímový Projekt" } = Astro.props;
   }
 
   .github-link svg {
-    transition: transform 0.2s;
+    transition:
+      transform 0.2s,
+      color 0.2s;
   }
 
   .github-link:hover svg {
     transform: scale(1.1);
+    color: #bbb;
   }
 
   .nav-toggle {

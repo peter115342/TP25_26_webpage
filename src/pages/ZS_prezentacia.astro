@@ -1,0 +1,242 @@
+---
+// RevealJS Presentation - Virtual Data Analyst
+// Zimný semester 2024/2025
+---
+
+<!doctype html>
+<html lang="sk">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Virtual Data Analyst - Prezentácia</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reset.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css"
+    />
+    <style>
+      .reveal {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 36px;
+      }
+      .reveal h1 {
+        font-size: 2.2em;
+        color: #333;
+        font-weight: 600;
+      }
+      .reveal h2 {
+        font-size: 1.6em;
+        color: #333;
+        font-weight: 600;
+        margin-bottom: 1em;
+      }
+      .reveal h3 {
+        font-size: 1.1em;
+        color: #555;
+        font-weight: 600;
+      }
+      .reveal .subtitle {
+        font-size: 0.8em;
+        color: #666;
+        margin-top: 0.4em;
+      }
+      .reveal ul {
+        font-size: 0.85em;
+        margin: 0;
+      }
+      .reveal li {
+        margin-bottom: 0.5em;
+        line-height: 1.4;
+      }
+      .reveal p {
+        font-size: 0.85em;
+        line-height: 1.5;
+      }
+      .flow-diagram {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4em;
+        margin-top: 1.2em;
+        font-size: 0.7em;
+      }
+      .flow-step {
+        background: #f0f0f0;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        padding: 0.6em 0.9em;
+        text-align: center;
+      }
+      .flow-arrow {
+        color: #999;
+      }
+      .two-column {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2em;
+        text-align: left;
+        font-size: 0.8em;
+      }
+      .example-box {
+        background: #f9f9f9;
+        border: 1px solid #ddd;
+        padding: 0.8em;
+        margin-top: 1em;
+        font-size: 0.75em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <!-- Slide 1: Titulka -->
+        <section>
+          <h1>Virtual Data Analyst</h1>
+          <h3>Tímový Projekt 25/26</h3>
+        </section>
+
+        <!-- Slide 2: Problém a Riešenie -->
+        <section>
+          <h2>Problém a Riešenie</h2>
+          <div class="two-column">
+            <div>
+              <h3>Problém</h3>
+              <ul>
+                <li>SQL je komplexný</li>
+                <li>Potreba rýchlych odpovedí</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Riešenie</h3>
+              <ul>
+                <li>Otázky v prirodzenom jazyku</li>
+                <li>AI generuje SQL</li>
+              </ul>
+            </div>
+          </div>
+          <div class="example-box">
+            <strong>Príklad:</strong> "Aký bol najpredávanejší produkt?"
+          </div>
+        </section>
+
+        <!-- Slide 3: Architektúra -->
+        <section>
+          <h2>Architektúra Systému</h2>
+          <div class="flow-diagram">
+            <div class="flow-step">
+              <div><strong>Používateľ</strong></div>
+              <div>Otázka</div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">
+              <div><strong>GPT-4.1</strong></div>
+              <div>SQL Generátor</div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">
+              <div><strong>Databáza</strong></div>
+              <div>Vykonanie</div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">
+              <div><strong>Gemini 2.5</strong></div>
+              <div>Sumarizátor</div>
+            </div>
+            <div class="flow-arrow">→</div>
+            <div class="flow-step">
+              <div><strong>Odpoveď</strong></div>
+              <div>Vizualizácie</div>
+            </div>
+          </div>
+          <p style="margin-top: 1em; color: #666; font-size: 0.65em">
+            Backend: FastAPI | Frontend: React | Docker
+          </p>
+        </section>
+
+        <!-- Slide 4: GenAI komponenty -->
+        <section>
+          <h2>GenAI Komponenty</h2>
+          <div
+            style="text-align: left; font-size: 0.85em; max-width: 900px; margin: 0 auto"
+          >
+            <h3 style="margin-top: 1em">SQL Generácia - GPT-4.1</h3>
+            <ul style="margin-top: 0.5em">
+              <li>Prirodzený jazyk → SQL</li>
+              <li>Analýza schémy databázy</li>
+            </ul>
+
+            <h3 style="margin-top: 1.2em">Sumarizácia - Gemini 2.5 Flash</h3>
+            <ul style="margin-top: 0.5em">
+              <li>Výsledky → zrozumiteľná odpoveď</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Slide 5: Pripojenie na Databázu -->
+        <section>
+          <h2>Databázové Pripojenie</h2>
+          <div
+            style="text-align: left; font-size: 0.85em; max-width: 900px; margin: 0 auto"
+          >
+            <ul style="margin-top: 0.5em">
+              <li>Aktuálne: PostgreSQL</li>
+              <li>Finálna verzia: ľubovoľná SQL databáza</li>
+            </ul>
+
+            <h3 style="margin-top: 1.2em">Bezpečnosť</h3>
+            <ul style="margin-top: 0.5em">
+              <li>Read-only - iba SELECT</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Slide 6: Frontend -->
+        <section>
+          <h2>Frontend Aplikácia</h2>
+          <div
+            style="text-align: left; font-size: 0.85em; max-width: 900px; margin: 0 auto"
+          >
+            <h3 style="margin-top: 1em">React + Vite</h3>
+            <ul style="margin-top: 0.5em">
+              <li>Single-page aplikácia</li>
+              <li>Responzívne UI</li>
+            </ul>
+
+            <h3 style="margin-top: 1.2em">Funkcionality</h3>
+            <ul style="margin-top: 0.5em">
+              <li>Textové pole pre otázky</li>
+              <li>Vizualizácie výsledkov</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- Slide 7: Ďakujeme -->
+        <section>
+          <h2>Ďakujeme za pozornosť</h2>
+          <p style="margin-top: 2em; font-size: 0.8em; color: #666">Otázky?</p>
+        </section>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"
+    ></script>
+    <script>
+      window.addEventListener("load", function () {
+        Reveal.initialize({
+          hash: true,
+          controls: true,
+          progress: true,
+          center: true,
+          transition: "slide",
+        });
+      });
+    </script>
+  </body>
+</html>
